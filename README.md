@@ -1,1 +1,38 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/B74p-HKt)
+# Controle de Almoxarifado
+
+### Descrição
+
+Sistema web desenvolvido para auxiliar no controle de materiais de um almoxarifado.
+
+### Tecnologias Utilizadas
+
+* HTML
+* CSS
+* JavaScript
+* MockAPI
+
+### Funcionalidades
+
+#### Sprint 1
+
+* Cadastro de materiais
+* Listagem de materiais
+* Integração com MockAPI
+
+### Como Executar
+
+1. Clonar o repositório.
+2. Abrir o projeto no VS Code.
+3. Executar com Live Server.
+
+### Próximas Etapas
+
+* Controle de entrada e saída de materiais.
+* Edição de registros.
+* Exclusão de registros.
+* Melhorias na interface.
+
+### Autor
+
+Matheus Carvalho
+
