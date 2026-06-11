@@ -29,3 +29,26 @@ async function listarMateriais() {
 }
 
 listarMateriais();
+
+async function cadastrarMaterial() {
+
+    const material = {
+        nome: inputNome.value,
+        quantidade: Number(inputQuantidade.value)
+    };
+
+    await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(material)
+    });
+
+    inputNome.value = "";
+    inputQuantidade.value = "";
+
+    listarMateriais();
+}
+
+btnCadastrar.addEventListener("click", cadastrarMaterial);
