@@ -19,18 +19,18 @@ Sistema web desenvolvido para auxiliar no controle de materiais de um almoxarifa
 * Listagem de materiais
 * Integração com MockAPI
 
+#### Sprint 2
+
+* Baixa de estoque dos materiais
+* Validação da quantidade retirada
+* Exclusão de materiais
+* Atualização dos dados no MockAPI
+
 ### Como Executar
 
 1. Clonar o repositório.
 2. Abrir o projeto no VS Code.
 3. Executar com Live Server.
-
-### Próximas Etapas
-
-* Controle de entrada e saída de materiais.
-* Edição de registros.
-* Exclusão de registros.
-* Melhorias na interface.
 
 ### Autor
 
