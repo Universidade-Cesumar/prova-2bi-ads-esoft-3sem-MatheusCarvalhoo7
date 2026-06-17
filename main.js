@@ -6,6 +6,7 @@ const inputNome = document.getElementById("input-nome");
 const inputQuantidade = document.getElementById("input-quantidade");
 const btnCadastrar = document.getElementById("btn-cadastrar");
 const listaMateriais = document.getElementById("lista-materiais");
+const inputRetirada = document.getElementById("input-retirada");
 
 async function listarMateriais() {
 
@@ -79,6 +80,32 @@ async function excluirMaterial(id) {
     await fetch(`${url}/${id}`, {
         method: "DELETE"
     });
+
+    listarMateriais();
+}
+
+async function baixarMaterial(id, estoqueAtual) {
+
+    const quantidadeRetirada = Number(inputRetirada.value);
+
+    if (!validarRetirada(estoqueAtual, quantidadeRetirada)) {
+        alert("Quantidade inválida para retirada.");
+        return;
+    }
+
+    const novoEstoque = estoqueAtual - quantidadeRetirada;
+
+    await fetch(`${url}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            quantidade: novoEstoque
+        })
+    });
+
+    inputRetirada.value = "";
 
     listarMateriais();
 }
