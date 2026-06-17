@@ -33,7 +33,7 @@ async function listarMateriais() {
             </tr>
         `;
     });
-    
+
 }
 
 listarMateriais();
@@ -72,4 +72,13 @@ function validarRetirada(estoqueAtual, quantidadeRetirada) {
     }
 
     return true;
+}
+
+async function excluirMaterial(id) {
+
+    await fetch(`${url}/${id}`, {
+        method: "DELETE"
+    });
+
+    listarMateriais();
 }
