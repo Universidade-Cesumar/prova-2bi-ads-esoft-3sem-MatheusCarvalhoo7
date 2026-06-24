@@ -1,5 +1,9 @@
 # Controle de Almoxarifado
 
+## Link do Projeto
+
+- https://universidade-cesumar.github.io/prova-2bi-ads-esoft-3sem-MatheusCarvalhoo7/
+
 ### Descrição
 
 Sistema web desenvolvido para auxiliar no controle de materiais de um almoxarifado.
@@ -26,6 +30,14 @@ Sistema web desenvolvido para auxiliar no controle de materiais de um almoxarifa
 * Exclusão de materiais
 * Atualização dos dados no MockAPI
 
+#### Sprint 3
+
+* Barra de pesquisa de materiais
+* Dashboard com total de itens cadastrados
+* Alerta visual para estoque crítico
+* Tratamento de erros nas requisições
+* Publicação do projeto
+
 ### Como Executar
 
 1. Clonar o repositório.
@@ -35,4 +47,3 @@ Sistema web desenvolvido para auxiliar no controle de materiais de um almoxarifa
 ### Autor
 
 Matheus Carvalho
-
