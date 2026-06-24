@@ -1,5 +1,3 @@
-// Arquivo para código javascript
-
 const url = "https://6a29e2d4f59cb8f65f1db317.mockapi.io/materiais";
 
 const inputNome = document.getElementById("input-nome");
@@ -11,68 +9,72 @@ const inputBusca = document.getElementById("input-busca");
 const totalItens = document.getElementById("total-itens");
 
 async function listarMateriais() {
+    try {
+        const resposta = await fetch(url);
+        const materiais = await resposta.json();
 
-    const resposta = await fetch(url);
+        const termoBusca = inputBusca.value.toLowerCase();
 
-    const materiais = await resposta.json();
+        totalItens.textContent = materiais.length;
+        listaMateriais.innerHTML = "";
 
-    const termoBusca = inputBusca.value.toLowerCase();
+        materiais.forEach(material => {
+            if (!material.nome.toLowerCase().includes(termoBusca)) {
+                return;
+            }
 
-    totalItens.textContent = materiais.length;
+            const classeEstoque =
+                material.quantidade < 10 ? "estoque-critico" : "";
 
-    listaMateriais.innerHTML = "";
+            listaMateriais.innerHTML += `
+                <tr class="${classeEstoque}">
+                    <td>${material.nome}</td>
+                    <td>${material.quantidade}</td>
+                    <td>
+                        <button class="btn-baixar" onclick="baixarMaterial('${material.id}', ${material.quantidade})">
+                            Baixar
+                        </button>
 
-    materiais.forEach(material => {
+                        <button class="btn-excluir" onclick="excluirMaterial('${material.id}')">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
 
-        if (!material.nome.toLowerCase().includes(termoBusca)) {
-            return;
-        }
-
-        const classeEstoque =
-            material.quantidade < 10
-                ? "estoque-critico"
-                : "";
-
-        listaMateriais.innerHTML += `
-            <tr class="${classeEstoque}">
-                <td>${material.nome}</td>
-                <td>${material.quantidade}</td>
-                <td>
-                    <button class="btn-baixar" onclick="baixarMaterial('${material.id}', ${material.quantidade})">
-                    Baixar
-                    </button>
-
-                    <button class="btn-excluir" onclick="excluirMaterial('${material.id}')">
-                        Excluir
-                    </button>
-                </td>
-            </tr>
-        `;
-    });
-
+    } catch (erro) {
+        console.error("Erro ao listar materiais:", erro);
+        alert("Erro ao carregar os materiais.");
+    }
 }
 
 listarMateriais();
 
 async function cadastrarMaterial() {
+    try {
+        const material = {
+            nome: inputNome.value,
+            quantidade: Number(inputQuantidade.value)
+        };
 
-    const material = {
-        nome: inputNome.value,
-        quantidade: Number(inputQuantidade.value)
-    };
+        await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(material)
+        });
 
-    await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(material)
-    });
+        inputNome.value = "";
+        inputQuantidade.value = "";
 
-    inputNome.value = "";
-    inputQuantidade.value = "";
+        listarMateriais();
 
-    listarMateriais();
+    } catch (erro) {
+        console.error("Erro ao cadastrar material:", erro);
+        alert("Erro ao cadastrar material.");
+    }
 }
 
 btnCadastrar.addEventListener("click", cadastrarMaterial);
@@ -80,7 +82,6 @@ btnCadastrar.addEventListener("click", cadastrarMaterial);
 inputBusca.addEventListener("input", listarMateriais);
 
 function validarRetirada(estoqueAtual, quantidadeRetirada) {
-
     if (quantidadeRetirada <= 0) {
         return false;
     }
@@ -93,36 +94,46 @@ function validarRetirada(estoqueAtual, quantidadeRetirada) {
 }
 
 async function excluirMaterial(id) {
+    try {
+        await fetch(`${url}/${id}`, {
+            method: "DELETE"
+        });
 
-    await fetch(`${url}/${id}`, {
-        method: "DELETE"
-    });
+        listarMateriais();
 
-    listarMateriais();
+    } catch (erro) {
+        console.error("Erro ao excluir material:", erro);
+        alert("Erro ao excluir material.");
+    }
 }
 
 async function baixarMaterial(id, estoqueAtual) {
+    try {
+        const quantidadeRetirada = Number(inputRetirada.value);
 
-    const quantidadeRetirada = Number(inputRetirada.value);
+        if (!validarRetirada(estoqueAtual, quantidadeRetirada)) {
+            alert("Quantidade inválida para retirada.");
+            return;
+        }
 
-    if (!validarRetirada(estoqueAtual, quantidadeRetirada)) {
-        alert("Quantidade inválida para retirada.");
-        return;
+        const novoEstoque = estoqueAtual - quantidadeRetirada;
+
+        await fetch(`${url}/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                quantidade: novoEstoque
+            })
+        });
+
+        inputRetirada.value = "";
+
+        listarMateriais();
+
+    } catch (erro) {
+        console.error("Erro ao baixar material:", erro);
+        alert("Erro ao baixar material.");
     }
-
-    const novoEstoque = estoqueAtual - quantidadeRetirada;
-
-    await fetch(`${url}/${id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            quantidade: novoEstoque
-        })
-    });
-
-    inputRetirada.value = "";
-
-    listarMateriais();
 }
