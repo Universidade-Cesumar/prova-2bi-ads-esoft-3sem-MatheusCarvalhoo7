@@ -1,24 +1,140 @@
-/* Caso queira utilizar framework como Bootstrap para estilização, pode utilizar. Basta ignoar esse arquivo */
-
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Tahoma, sans-serif;
+    background: linear-gradient(135deg, #1f2937, #2563eb);
+    min-height: 100vh;
 }
 
-input,
+main {
+    width: 85%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+}
+
+main > p {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+section {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
 button {
-    padding: 8px;
-    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#btn-cadastrar {
+    background-color: #2563eb;
+    margin-top: 10px;
+}
+
+.btn-baixar {
+    background-color: #16a34a;
+    margin-right: 5px;
+}
+
+.btn-excluir {
+    background-color: #dc2626;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: white;
+}
+
+th {
+    background-color: #1f2937;
+    color: white;
 }
 
 th,
 td {
-    border: 1px solid #cccccc;
-    padding: 10px;
+    border: 1px solid #d1d5db;
+    padding: 12px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+#total-itens {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.estoque-critico {
+    background-color: #fecaca !important;
+    color: #991b1b;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+    main {
+        width: 95%;
+    }
+
+    input {
+        max-width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    .btn-baixar,
+    .btn-excluir {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+    }
 }
