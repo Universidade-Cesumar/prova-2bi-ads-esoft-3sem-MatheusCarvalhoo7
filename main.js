@@ -16,11 +16,17 @@ async function listarMateriais() {
 
     const materiais = await resposta.json();
 
+    const termoBusca = inputBusca.value.toLowerCase();
+
     totalItens.textContent = materiais.length;
 
     listaMateriais.innerHTML = "";
 
     materiais.forEach(material => {
+
+        if (!material.nome.toLowerCase().includes(termoBusca)) {
+            return;
+        }
 
         const classeEstoque =
             material.quantidade < 10
@@ -70,6 +76,8 @@ async function cadastrarMaterial() {
 }
 
 btnCadastrar.addEventListener("click", cadastrarMaterial);
+
+inputBusca.addEventListener("input", listarMateriais);
 
 function validarRetirada(estoqueAtual, quantidadeRetirada) {
 
