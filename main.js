@@ -7,12 +7,16 @@ const inputQuantidade = document.getElementById("input-quantidade");
 const btnCadastrar = document.getElementById("btn-cadastrar");
 const listaMateriais = document.getElementById("lista-materiais");
 const inputRetirada = document.getElementById("input-retirada");
+const inputBusca = document.getElementById("input-busca");
+const totalItens = document.getElementById("total-itens");
 
 async function listarMateriais() {
 
     const resposta = await fetch(url);
 
     const materiais = await resposta.json();
+
+    totalItens.textContent = materiais.length;
 
     listaMateriais.innerHTML = "";
 
