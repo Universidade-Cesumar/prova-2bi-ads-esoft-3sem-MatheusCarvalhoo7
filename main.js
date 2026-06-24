@@ -22,8 +22,13 @@ async function listarMateriais() {
 
     materiais.forEach(material => {
 
+        const classeEstoque =
+            material.quantidade < 10
+                ? "estoque-critico"
+                : "";
+
         listaMateriais.innerHTML += `
-            <tr>
+            <tr class="${classeEstoque}">
                 <td>${material.nome}</td>
                 <td>${material.quantidade}</td>
                 <td>
